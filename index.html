@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>سوق الفرات</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>سوق الفرات</h1>
+    <nav>
+      <ul>
+        <li><a href="#" onclick="filterProducts('all')">الكل</a></li>
+        <li><a href="#" onclick="filterProducts('المنزلية')">أدوات منزلية</a></li>
+        <li><a href="#" onclick="filterProducts('الألبسة')">الألبسة</a></li>
+        <li><a href="#" onclick="filterProducts('المكياجات')">مكياجات</a></li>
+        <li><a href="#" onclick="filterProducts('الإلكترونيات')">إلكترونيات</a></li>
+      </ul>
+    </nav>
+    <input type="text" id="searchBox" placeholder="ابحث عن منتج..." oninput="searchProducts()">
+  </header>
+
+  <main>
+    <section id="add-product">
+      <h2>تسجيل تاجر جديد وإضافة منتج</h2>
+      <form id="productForm">
+        <input type="text" id="sellerName" placeholder="اسم التاجر" required>
+        <input type="text" id="productName" placeholder="اسم المنتج" required>
+        <input type="text" id="productPrice" placeholder="السعر" required>
+        <input type="text" id="productCategory" placeholder="الفئة (مثلاً: الألبسة)" required>
+        <input type="text" id="productImage" placeholder="رابط الصورة" required>
+        <input type="text" id="whatsappNumber" placeholder="رقم الواتساب (مثلاً 963900000000)" required>
+        <button type="submit">إضافة المنتج</button>
+      </form>
+    </section>
+
+    <section id="products-container">
+      <!-- سيتم عرض المنتجات هنا -->
+    </section>
+  </main>
+
+  <footer>
+    <p>للتواصل مع خدمة العملاء: <a href="https://wa.me/963900000001" target="_blank">اضغط هنا</a></p>
+    <p>© 2025 سوق الفرات</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
