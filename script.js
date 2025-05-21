@@ -1,56 +1,47 @@
-let products = [];
+document.getElementById("productForm").addEventListener("submit", function(event) {
+    event.preventDefault();
 
-document.getElementById("productForm").addEventListener("submit", function(e) {
-  e.preventDefault();
-  const name = document.getElementById("productName").value;
-  const price = document.getElementById("productPrice").value;
-  const image = document.getElementById("productImage").value;
-  const seller = document.getElementById("sellerName").value;
-  const category = document.getElementById("productCategory").value;
-  const whatsapp = document.getElementById("whatsappNumber").value;
+    const name = this.querySelector('input[type="text"]').value;
+    const price = this.querySelector('input[type="number"]').value;
+    let phone = this.querySelector('input[type="tel"]').value;
+    const imageInput = this.querySelector('input[type="file"]');
+    const imageFile = imageInput.files[0];
 
-  const product = {
-    name,
-    price,
-    image,
-    seller,
-    category,
-    whatsapp: `https://wa.me/${whatsapp}?text=أرغب%20بشراء%20${encodeURIComponent(name)}`
-  };
+    if (!imageFile || !phone) return;
 
-  products.push(product);
-  displayProducts(products);
-  this.reset();
+    // تنظيف الرقم من أي رموز غير الأرقام
+    phone = phone.replace(/[^0-9]/g, '');
+
+    // إزالة 00 إن وُجدت وتحويلها إلى صيغة wa.me
+    if (phone.startsWith('00')) {
+        phone = phone.substring(2);
+    } else if (phone.startsWith('0')) {
+        alert("يرجى إدخال رقم الهاتف بصيغة دولية تبدأ بـ + أو 00 (مثل: +9639XXXXXXX)");
+        return;
+    }
+
+    // التأكد أن الرقم أصبح دولي وصحيح (مثلاً: 9639...)
+    if (!phone.match(/^963\d{7,8}$/)) {
+        alert("يرجى التأكد من صحة الرقم. يجب أن يبدأ بـ 963 ويتبعه 7 أو 8 أرقام.");
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const productList = document.getElementById("productList");
+        const card = document.createElement("div");
+        card.className = "product-card";
+        card.innerHTML = `
+            <img src="${e.target.result}" alt="صورة المنتج" />
+            <h3>${name}</h3>
+            <p>السعر: ${price} ل.س</p>
+            <a href="https://wa.me/${phone}?text=مرحباً، أود الاستفسار عن المنتج: ${encodeURIComponent(name)}" target="_blank">
+                تواصل عبر واتساب
+            </a>
+        `;
+        productList.appendChild(card);
+    };
+    reader.readAsDataURL(imageFile);
+
+    this.reset();
 });
-
-function displayProducts(productsToShow) {
-  const container = document.getElementById('products-container');
-  container.innerHTML = "";
-  productsToShow.forEach(product => {
-    const box = document.createElement('div');
-    box.className = 'product';
-    box.innerHTML = `
-      <img src="${product.image}" alt="${product.name}">
-      <h3>${product.name}</h3>
-      <p>السعر: ${product.price}</p>
-      <p>البائع: ${product.seller}</p>
-      <a class="whatsapp-button" href="${product.whatsapp}" target="_blank">تواصل عبر واتساب</a>
-    `;
-    container.appendChild(box);
-  });
-}
-
-function filterProducts(category) {
-  if (category === "all") {
-    displayProducts(products);
-  } else {
-    const filtered = products.filter(p => p.category === category);
-    displayProducts(filtered);
-  }
-}
-
-function searchProducts() {
-  const term = document.getElementById("searchBox").value.trim();
-  const results = products.filter(p => p.name.includes(term));
-  displayProducts(results);
-}
