@@ -1,50 +1,41 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>سوق الفرات</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>سوق الفرات</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>سوق الفرات</h1>
-    <nav>
-      <ul>
-        <li><a href="#" onclick="filterProducts('all')">الكل</a></li>
-        <li><a href="#" onclick="filterProducts('المنزلية')">أدوات منزلية</a></li>
-        <li><a href="#" onclick="filterProducts('الألبسة')">الألبسة</a></li>
-        <li><a href="#" onclick="filterProducts('المكياجات')">مكياجات</a></li>
-        <li><a href="#" onclick="filterProducts('الإلكترونيات')">إلكترونيات</a></li>
-      </ul>
-    </nav>
-    <input type="text" id="searchBox" placeholder="ابحث عن منتج..." oninput="searchProducts()">
-  </header>
+    <header>
+        <h1>سوق الفرات</h1>
+        <p>أهلاً بكم في سوق الفرات، ستجدون هنا كل ما تحتاجونه: ألبسة، أحذية، مكياجات، إكسسوارات، أدوات منزلية.</p>
+        <p class="service-number">📞 خدمة العملاء: +1 (844) 580‑4018</p>
+    </header>
 
-  <main>
-    <section id="add-product">
-      <h2>تسجيل تاجر جديد وإضافة منتج</h2>
-      <form id="productForm">
-        <input type="text" id="sellerName" placeholder="اسم التاجر" required>
-        <input type="text" id="productName" placeholder="اسم المنتج" required>
-        <input type="text" id="productPrice" placeholder="السعر" required>
-        <input type="text" id="productCategory" placeholder="الفئة (مثلاً: الألبسة)" required>
-        <input type="text" id="productImage" placeholder="رابط الصورة" required>
-        <input type="text" id="whatsappNumber" placeholder="رقم الواتساب (مثلاً 963900000000)" required>
-        <button type="submit">إضافة المنتج</button>
-      </form>
+    <section class="locations">
+        <h2>اختر المحافظة</h2>
+        <select>
+            <option>دمشق</option><option>ريف دمشق</option><option>حلب</option><option>حمص</option>
+            <option>حماة</option><option>اللاذقية</option><option>طرطوس</option><option>إدلب</option>
+            <option>درعا</option><option>السويداء</option><option>دير الزور</option><option>الرقة</option>
+            <option>الحسكة</option><option>القنيطرة</option>
+        </select>
     </section>
 
-    <section id="products-container">
-      <!-- سيتم عرض المنتجات هنا -->
+    <section class="form-section">
+        <h2>أضف منتجك</h2>
+        <form id="productForm">
+            <input type="text" placeholder="اسم المنتج" required />
+            <input type="number" placeholder="السعر" required />
+            <input type="tel" placeholder="رقم واتساب (مثل: +9639XXXXXXX)" required />
+            <input type="file" accept="image/*" required />
+            <button type="submit">إضافة المنتج</button>
+        </form>
     </section>
-  </main>
 
-  <footer>
-    <p>للتواصل مع خدمة العملاء: <a href="https://wa.me/963900000001" target="_blank">اضغط هنا</a></p>
-    <p>© 2025 سوق الفرات</p>
-  </footer>
+    <section id="productList" class="product-list"></section>
 
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
